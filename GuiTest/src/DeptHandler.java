@@ -30,8 +30,78 @@ public class DeptHandler {
 		stmt.close();
 		
 	}
-	public void updateRow(Vector<String> input) throws SQLException// 받은 벡터 값으로 row update
+		public void updateRow(int num, Vector<String> input) throws SQLException// 받은 벡터 값으로 row update.query에 , 넣어주는 방법 고민하기?=> , 가 없으면 제대로 된 query로 인식을 못한다!
 	{
+		stmt=conn.createStatement();
+		String query="UPDATE deptstores SET";
+		for(int i=0;i<input.size();i++)
+		{
+			switch(i)
+			{
+			case 1:{
+				if(input.elementAt(i)!="")
+				{
+					query=query+"name='"+input.elementAt(i)+"'";
+					int count=0;
+					for(int j=i;j<input.size();j++)
+					{
+						if(input.elementAt(j)!="")
+							count++;
+					}
+					if(count!=0)
+					{
+						query=query+",";
+					}
+				
+				}
+				
+				break;
+			}
+			case 2:
+			{
+				if(input.elementAt(i)!="")
+				{
+					query=query+" city='"+input.elementAt(i)+"'";
+					int count=0;
+					for(int j=i;j<input.size();j++)
+					{
+						if(input.elementAt(j)!="")
+							count++;
+					}
+					if(count!=0)
+					{
+						query=query+",";
+					}
+				}
+				
+				break;
+			}
+			case 3:
+			{
+				if(input.elementAt(i)!="")
+				{
+					query=query+" call_num='"+input.elementAt(i)+"'";
+					if(input.elementAt(4)!="")
+					{
+						query=query+",";
+					}
+				}
+				break;
+			}
+			case 4:
+			{
+				if(input.elementAt(i)!="")
+				{
+					query=query+" owner="+input.elementAt(i);
+				}
+				break;
+			}
+			}
+		}
+		query=query+" WHERE department_id="+num;
+		stmt.executeQuery(query);
+		System.out.println(query+" Executed");
+		stmt.close();
 		
 	}
 	
