@@ -16,7 +16,15 @@ public class EventFireStarter {
 		input.add("202");
 		
 		d.InsertRow(input);
-		d.deleteRow(100);
+		//d.deleteRow(100);
+		Vector<String> update=new Vector<>();
+		update.add("100");
+		update.add("");
+		update.add("서울");
+		update.add("02-333-3333");
+		update.add("");
+		d.updateRow(100,update);
+		
 
 	}
 
